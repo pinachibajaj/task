@@ -15,6 +15,12 @@ def read_idx(filename):
         return np.frombuffer(f.read(), dtype=np.uint8).reshape(shape)
 
 
+# In[ ]:
+
+
+
+
+
 # In[3]:
 
 
@@ -56,7 +62,7 @@ plt.imshow(x_train[random_num], cmap=plt.get_cmap('gray'))
 plt.show()
 
 
-# In[7]:
+# In[5]:
 
 
 from keras.datasets import mnist
@@ -67,21 +73,21 @@ from keras.layers import Dense , Dropout , Flatten
 from keras.layers import Conv2D , MaxPooling2D , BatchNormalization
 
 
-# In[8]:
+# In[6]:
 
 
 batch_size = 128
 epochs = 3
 
 
-# In[15]:
+# In[7]:
 
 
 img_rows = x_train[0].shape[0]
 img_col = x_train[0].shape[1]
 
 
-# In[24]:
+# In[8]:
 
 
 x_train = x_train.reshape(x_train.shape[0], img_rows, img_col, 1)
@@ -128,7 +134,7 @@ model.compile(loss = 'categorical_crossentropy',
 print(model.summary())
 
 
-# In[26]:
+# In[9]:
 
 
 history = model.fit(x_train, y_train,
@@ -142,10 +148,13 @@ print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 
 
-# In[ ]:
+# In[1]:
 
 
-
+loss = score[0]
+acc = score[1]
+with open("acc.txt" , "w") as f:
+    f.write("%.2f"%acc)
 
 
 # In[ ]:
