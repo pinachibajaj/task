@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[2]:
-
 
 import struct
 import numpy as np
@@ -14,24 +9,10 @@ def read_idx(filename):
         shape = tuple(struct.unpack('>I', f.read(4))[0] for d in range(dims))
         return np.frombuffer(f.read(), dtype=np.uint8).reshape(shape)
 
-
-# In[ ]:
-
-
-
-
-
-# In[3]:
-
-
 x_train = read_idx("train-images-idx3-ubyte")
 y_train = read_idx("train-labels-idx1-ubyte")
 x_test = read_idx("t10k-images-idx3-ubyte")
 y_test = read_idx("t10k-labels-idx1-ubyte")
-
-
-# In[4]:
-
 
 import matplotlib.pyplot as plt
 
@@ -61,10 +42,6 @@ plt.imshow(x_train[random_num], cmap=plt.get_cmap('gray'))
 
 plt.show()
 
-
-# In[5]:
-
-
 from keras.datasets import mnist
 from keras.utils import np_utils
 import keras
@@ -72,23 +49,11 @@ from keras.models import Sequential
 from keras.layers import Dense , Dropout , Flatten
 from keras.layers import Conv2D , MaxPooling2D , BatchNormalization
 
-
-# In[6]:
-
-
 batch_size = 128
 epochs = 3
 
-
-# In[7]:
-
-
 img_rows = x_train[0].shape[0]
 img_col = x_train[0].shape[1]
-
-
-# In[8]:
-
 
 x_train = x_train.reshape(x_train.shape[0], img_rows, img_col, 1)
 x_test = x_test.reshape(x_test.shape[0], img_rows, img_col, 1)
@@ -133,10 +98,6 @@ model.compile(loss = 'categorical_crossentropy',
 
 print(model.summary())
 
-
-# In[9]:
-
-
 history = model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
@@ -147,18 +108,7 @@ score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 
-
-# In[1]:
-
-
 loss = score[0]
 acc = score[1]
 with open("acc.txt" , "w") as f:
     f.write("%.2f"%acc)
-
-
-# In[ ]:
-
-
-
-
